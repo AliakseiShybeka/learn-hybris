@@ -18,7 +18,7 @@ pipeline {
                         sh " echo ${params.TEXT} | grep 'line'"
                     }
                     else {
-                        echo 'fuck'
+                        echo 'oops'
                     }
                 }
             }

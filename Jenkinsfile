@@ -16,10 +16,10 @@ pipeline {
                         sh " echo 'CREDS = '${params.CREDS} "
 
                         sh """
-                        echo 'TEXT = "\n${params.TEXT}'
+                        echo -e 'TEXT = "\n${params.TEXT}'
                         """
                         sh """
-                        echo '${params.TEXT}' | grep 'line'
+                        echo -e '${params.TEXT}' | grep '${params.TEST}'
                        """
                     }
                     else {
@@ -31,5 +31,25 @@ pipeline {
 
 
         }
+        stage ('Parallel-demo') {
+            steps{
+                parallel(
+                        a: {
+                            writeFile file: 'groovy1.txt', text: 'CHECK = ' + params.CHECK +
+                                    '\nTEST = ' + params.TEST +
+                                    '\nTEXT = ' + params.TEXT +
+                                    '\nCREDS = ' + params.CREDS
+                        },
+                        b: {
+                            git url: 'https://github.com/jfrogdev/project-examples.git'
+                        }
+                )
+
+            }
+        }
     }
+}
+
+void renameMyFile() {
+
 }

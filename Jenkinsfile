@@ -11,12 +11,8 @@ pipeline {
             steps {
                 script {
                     if (params.CHECK) {
-                        sh """
-                        echo '========================'
-                        echo '=   check is enabled   ='
-                        echo '========================'
-                        echo 'CHOOSE = '${params.TEST}
-                    """
+                        sh " echo 'CHOOSE = '${params.TEST}"
+
 
 
 //

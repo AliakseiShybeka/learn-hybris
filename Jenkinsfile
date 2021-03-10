@@ -13,6 +13,9 @@ pipeline {
                     if (params.CHECK) {
                         echo 'hello'
                     }
+                    else {
+                        echo 'fuck'
+                    }
                 }
             }
 

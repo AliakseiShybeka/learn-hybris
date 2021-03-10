@@ -47,9 +47,20 @@ pipeline {
 
             }
         }
+        stage ('File Rename') {
+            steps{
+                renameMyFile ("groovy1.txt")
+            }
+        }
     }
 }
 
-void renameMyFile() {
+def void renameMyFile(pathToSourceFile) {
+
+    if (fileExists(file: pathToSourceFile)) {
+        def newFile = "newfile.txt"
+
+        writeFile(file: newFile, encoding: "UTF-8", text: readFile(file: pathToSourceFile, encoding: "UTF-8"))
+    }
 
 }

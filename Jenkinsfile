@@ -11,11 +11,10 @@ pipeline {
             steps {
                 script {
                     if (params.CHECK) {
-                        sh " echo 'CHOOSE = '${params.TEST}"
-
-
-
-//
+                        sh " echo 'TEST = '${params.TEST}"
+                        sh " echo 'CHOISE = '${params.CHOISE}"
+                        sh " echo 'CREDS = '${params.CREDS}"
+                        sh " echo 'TEXT = '${params.TEXT}"
                     }
                     else {
                         echo 'fuck'

@@ -14,7 +14,7 @@ pipeline {
                         echo '========================'
                         echo '=   check is enabled   ='
                         echo '========================'
-                        echo 'TEST = '${params.TEST}
+                        echo ${params.TEST}
 //                        echo 'CHOOSE = '${params.}
                     }
                     else {

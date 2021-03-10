@@ -1,0 +1,33 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+
+    # tasks file for install Java 1.8.0 to Debian systems
+    - name: apt-get update
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all apt packages
+      apt:
+        upgrade: dist
+        force_apt_get: yes
+
+    - name: Install latest version of "openjdk-8-jdk" ignoring "install-recommends"
+      apt:
+        name: openjdk-8-jdk
+        state: latest
+        install_recommends: no
+
+    - name: Just force systemd to reread configs
+      systemd:
+        daemon_reload: yes
+
+    # Next Play : install jenkins Role
+- hosts: all
+  become: yes
+
+  roles:
+    - { role: lean_delivery.jenkins, when: ansible_system == 'Linux' }
+

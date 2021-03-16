@@ -4,3 +4,4 @@
 src/*
 .vagrant/*
 ./anible/roles/*
+*.zip

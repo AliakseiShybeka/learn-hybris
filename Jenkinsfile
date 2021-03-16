@@ -1,4 +1,16 @@
+def void renameMyFile(pathToSourceFile, newName) {
+
+    if (fileExists(file: pathToSourceFile)) {
+        writeFile(file: newName, text: readFile(file: pathToSourceFile))
+    }
+
+}
+
+
+
+
 pipeline {
+
     agent any
 
 //    environment {
@@ -47,20 +59,45 @@ pipeline {
 
             }
         }
+        stage ('paralel') {
+            parallel {
+                stage ('1') {
+                    steps {
+                        echo '1'
+                    }
+                }
+                stage ('2') {
+                    steps {
+                        echo '2'
+                    }
+                }
+
+            }
+        }
+
         stage ('File Rename') {
             steps{
-                renameMyFile ("groovy1.txt")
+                renameMyFile ('groovy1.txt','newfile.txt')
+            }
+        }
+
+        stage ('file read') {
+            steps {
+                echo readFile(file: 'newfile.txt')
+
+            }
+        }
+        stage('Delete newfile.txt file') {
+            steps {
+                script {
+                    if (fileExists(file: 'newfile.txt')) {
+                        echo('yes')
+                    } else {
+                        echo('newfile.txt file not found')
+                    }
+                }
             }
         }
     }
 }
 
-def void renameMyFile(pathToSourceFile) {
-
-    if (fileExists(file: pathToSourceFile)) {
-        def newFile = "newfile.txt"
-
-        writeFile(file: newFile, encoding: "UTF-8", text: readFile(file: pathToSourceFile, encoding: "UTF-8"))
-    }
-
-}

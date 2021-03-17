@@ -30,16 +30,16 @@
         state: latest
         install_recommends: no
 
-    - name: Create a /SAP directory if it does not exist
+    - name: Create a /opt/hybris directory if it does not exist
       file:
-        path: /SAP
+        path: /opt/hybris
         state: directory
         mode: '0755'
 
-    - name: Copying all files from ./files_to_copying/ to remote /SAP
+    - name: unarchive all files from ./files_to_copying/ to remote /opt/hybris
       unarchive:
         src: "{{item}}"
-        dest: /SAP
+        dest: /opt/hybris
       with_fileglob:
         - ./files_to_copying/*
 
